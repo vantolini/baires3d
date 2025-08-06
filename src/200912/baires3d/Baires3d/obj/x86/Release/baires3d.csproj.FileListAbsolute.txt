@@ -1,0 +1,251 @@
+C:\b3d\Baires3d\baires3d\obj\x86\Release\ResolveAssemblyReference.cache
+C:\b3d\Baires3d\baires3d\obj\x86\Release\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.FormAbout.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.FormLayerOptions.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.Forms.FormNuevaOpcion.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.FormOpciones.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.Main.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.Properties.Resources.resources
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.csproj.GenerateResource.Cache
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\vectorLineRenderer.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Fonts\Barrio.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Fonts\Calle.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\0.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\1.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\2.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Misc\dirty.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\bancos.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\estacionessubte.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\bomberos.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\escuelas.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\iglesias.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\monumentos.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\clinicas.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Layers\Symbols\arrow.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Skybox\moon.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Skybox\moonglow.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Skybox\starfield.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\3.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\4.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\5.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\6.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\7.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\10.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\8.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Casas\9.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Pisos\0.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Fonts\fontBold.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Fonts\fontRegular.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Pisos\1.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Pisos\2.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Textures\Pisos\3.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Models\sphere.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Models\plane.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\box.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\capsule.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Agronomia.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Almagro.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Balvanera.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Barracas.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Belgrano.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Boedo.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Caballito.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Chacarita.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Coghlan.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Colegiales.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Constitucion.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Flores.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Floresta.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\La Boca.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Liniers.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Mataderos.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Monte Castro.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Montserrat.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Nueva Pompeya.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Nuñez.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Palermo.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Parque Avellaneda.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Parque Chacabuco.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Parque Chas.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Parque Patricios.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Paternal.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Puerto Madero.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Recoleta.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Retiro.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Saavedra.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\San Cristobal.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\San Nicolas.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\San Telmo.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Velez Sarsfield.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Versalles.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Crespo.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa del Parque.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Devoto.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa General Mitre.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Lugano.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Luro.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Ortuzar.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Pueyrredon.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Real.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Riachuelo.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Santa Rita.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Soldati.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Barrios\Villa Urquiza.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\sphere.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Shaders\ColorGlowBumpMap.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Shaders\ColorGlowBumpReflect.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Shaders\ColorGlowMap.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Shaders\ColorMap.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Skybox\scatter.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Skybox\SNoise.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Skybox\Textured.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Skybox.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\terrain.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Shaders\Bloom.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Color.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Depth.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\Model.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Effects\ShadowMap.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Models\wheel.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\car.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\wheel.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear1.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear1ToGear2.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear2.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear2ToGear3.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear3.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear3ToGear4.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear4.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear4ToGear5.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Sounds\Gear5.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\Models\car_0.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Content\car_0.xnb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\baires3d.exe
+C:\b3d\Baires3d\baires3d\bin\x86\Release\baires3d.pdb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\ICSharpCode.SharpZipLib.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\JigLibX.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\NPack.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\SharpMap.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\SlimDX.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Ziggyware.Utility.dll
+C:\b3d\Baires3d\baires3d\bin\x86\Release\Ziggyware.Utility.pdb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\SlimDX.pdb
+C:\b3d\Baires3d\baires3d\bin\x86\Release\SlimDX.xml
+C:\b3d\Baires3d\baires3d\bin\x86\Release\JigLibX.pdb
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.exe
+C:\b3d\Baires3d\baires3d\obj\x86\Release\baires3d.pdb
+C:\b3d\build\Content\vectorLineRenderer.xnb
+C:\b3d\build\Content\Fonts\Barrio.xnb
+C:\b3d\build\Content\Fonts\Calle.xnb
+C:\b3d\build\Content\Textures\Casas\0.xnb
+C:\b3d\build\Content\Textures\Casas\1.xnb
+C:\b3d\build\Content\Textures\Casas\2.xnb
+C:\b3d\build\Content\Textures\Misc\dirty.xnb
+C:\b3d\build\Content\Layers\Symbols\bancos.xnb
+C:\b3d\build\Content\Layers\Symbols\estacionessubte.xnb
+C:\b3d\build\Content\Layers\Symbols\bomberos.xnb
+C:\b3d\build\Content\Layers\Symbols\escuelas.xnb
+C:\b3d\build\Content\Layers\Symbols\iglesias.xnb
+C:\b3d\build\Content\Layers\Symbols\monumentos.xnb
+C:\b3d\build\Content\Layers\Symbols\clinicas.xnb
+C:\b3d\build\Content\Layers\Symbols\arrow.xnb
+C:\b3d\build\Content\Textures\Skybox\moon.xnb
+C:\b3d\build\Content\Textures\Skybox\moonglow.xnb
+C:\b3d\build\Content\Textures\Skybox\starfield.xnb
+C:\b3d\build\Content\Textures\Casas\3.xnb
+C:\b3d\build\Content\Textures\Casas\4.xnb
+C:\b3d\build\Content\Textures\Casas\5.xnb
+C:\b3d\build\Content\Textures\Casas\6.xnb
+C:\b3d\build\Content\Textures\Casas\7.xnb
+C:\b3d\build\Content\Textures\Casas\10.xnb
+C:\b3d\build\Content\Textures\Casas\8.xnb
+C:\b3d\build\Content\Textures\Casas\9.xnb
+C:\b3d\build\Content\Textures\Pisos\0.xnb
+C:\b3d\build\Content\Fonts\fontBold.xnb
+C:\b3d\build\Content\Fonts\fontRegular.xnb
+C:\b3d\build\Content\Textures\Pisos\1.xnb
+C:\b3d\build\Content\Textures\Pisos\2.xnb
+C:\b3d\build\Content\Textures\Pisos\3.xnb
+C:\b3d\build\Content\Models\sphere.xnb
+C:\b3d\build\Content\Models\plane.xnb
+C:\b3d\build\Content\box.xnb
+C:\b3d\build\Content\capsule.xnb
+C:\b3d\build\Content\Barrios\Agronomia.xnb
+C:\b3d\build\Content\Barrios\Almagro.xnb
+C:\b3d\build\Content\Barrios\Balvanera.xnb
+C:\b3d\build\Content\Barrios\Barracas.xnb
+C:\b3d\build\Content\Barrios\Belgrano.xnb
+C:\b3d\build\Content\Barrios\Boedo.xnb
+C:\b3d\build\Content\Barrios\Caballito.xnb
+C:\b3d\build\Content\Barrios\Chacarita.xnb
+C:\b3d\build\Content\Barrios\Coghlan.xnb
+C:\b3d\build\Content\Barrios\Colegiales.xnb
+C:\b3d\build\Content\Barrios\Constitucion.xnb
+C:\b3d\build\Content\Barrios\Flores.xnb
+C:\b3d\build\Content\Barrios\Floresta.xnb
+C:\b3d\build\Content\Barrios\La Boca.xnb
+C:\b3d\build\Content\Barrios\Liniers.xnb
+C:\b3d\build\Content\Barrios\Mataderos.xnb
+C:\b3d\build\Content\Barrios\Monte Castro.xnb
+C:\b3d\build\Content\Barrios\Montserrat.xnb
+C:\b3d\build\Content\Barrios\Nueva Pompeya.xnb
+C:\b3d\build\Content\Barrios\Nuñez.xnb
+C:\b3d\build\Content\Barrios\Palermo.xnb
+C:\b3d\build\Content\Barrios\Parque Avellaneda.xnb
+C:\b3d\build\Content\Barrios\Parque Chacabuco.xnb
+C:\b3d\build\Content\Barrios\Parque Chas.xnb
+C:\b3d\build\Content\Barrios\Parque Patricios.xnb
+C:\b3d\build\Content\Barrios\Paternal.xnb
+C:\b3d\build\Content\Barrios\Puerto Madero.xnb
+C:\b3d\build\Content\Barrios\Recoleta.xnb
+C:\b3d\build\Content\Barrios\Retiro.xnb
+C:\b3d\build\Content\Barrios\Saavedra.xnb
+C:\b3d\build\Content\Barrios\San Cristobal.xnb
+C:\b3d\build\Content\Barrios\San Nicolas.xnb
+C:\b3d\build\Content\Barrios\San Telmo.xnb
+C:\b3d\build\Content\Barrios\Velez Sarsfield.xnb
+C:\b3d\build\Content\Barrios\Versalles.xnb
+C:\b3d\build\Content\Barrios\Villa Crespo.xnb
+C:\b3d\build\Content\Barrios\Villa del Parque.xnb
+C:\b3d\build\Content\Barrios\Villa Devoto.xnb
+C:\b3d\build\Content\Barrios\Villa General Mitre.xnb
+C:\b3d\build\Content\Barrios\Villa Lugano.xnb
+C:\b3d\build\Content\Barrios\Villa Luro.xnb
+C:\b3d\build\Content\Barrios\Villa Ortuzar.xnb
+C:\b3d\build\Content\Barrios\Villa Pueyrredon.xnb
+C:\b3d\build\Content\Barrios\Villa Real.xnb
+C:\b3d\build\Content\Barrios\Villa Riachuelo.xnb
+C:\b3d\build\Content\Barrios\Villa Santa Rita.xnb
+C:\b3d\build\Content\Barrios\Villa Soldati.xnb
+C:\b3d\build\Content\Barrios\Villa Urquiza.xnb
+C:\b3d\build\Content\sphere.xnb
+C:\b3d\build\Content\Shaders\ColorGlowBumpMap.xnb
+C:\b3d\build\Content\Shaders\ColorGlowBumpReflect.xnb
+C:\b3d\build\Content\Shaders\ColorGlowMap.xnb
+C:\b3d\build\Content\Shaders\ColorMap.xnb
+C:\b3d\build\Content\Effects\Skybox\scatter.xnb
+C:\b3d\build\Content\Effects\Skybox\SNoise.xnb
+C:\b3d\build\Content\Effects\Skybox\Textured.xnb
+C:\b3d\build\Content\Effects\Skybox.xnb
+C:\b3d\build\Content\Effects\terrain.xnb
+C:\b3d\build\Content\Shaders\Bloom.xnb
+C:\b3d\build\Content\Effects\Color.xnb
+C:\b3d\build\Content\Effects\Depth.xnb
+C:\b3d\build\Content\Effects\Model.xnb
+C:\b3d\build\Content\Effects\ShadowMap.xnb
+C:\b3d\build\Content\Models\wheel.xnb
+C:\b3d\build\Content\car.xnb
+C:\b3d\build\Content\wheel.xnb
+C:\b3d\build\Content\Sounds\Gear1.xnb
+C:\b3d\build\Content\Sounds\Gear1ToGear2.xnb
+C:\b3d\build\Content\Sounds\Gear2.xnb
+C:\b3d\build\Content\Sounds\Gear2ToGear3.xnb
+C:\b3d\build\Content\Sounds\Gear3.xnb
+C:\b3d\build\Content\Sounds\Gear3ToGear4.xnb
+C:\b3d\build\Content\Sounds\Gear4.xnb
+C:\b3d\build\Content\Sounds\Gear4ToGear5.xnb
+C:\b3d\build\Content\Sounds\Gear5.xnb
+C:\b3d\build\Content\Models\car_0.xnb
+C:\b3d\build\Content\car_0.xnb
+C:\b3d\build\baires3d.exe
+C:\b3d\build\baires3d.pdb

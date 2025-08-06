@@ -1,0 +1,8 @@
+C:\dev\git\b3d\b3d\newbuilder\FBX\obj\Debug\netstandard2.0\FBX.csproj.CoreCompileInputs.cache
+C:\dev\git\b3d\b3d\newbuilder\FBX\obj\Debug\netstandard2.0\FBX.AssemblyInfoInputs.cache
+C:\dev\git\b3d\b3d\newbuilder\FBX\obj\Debug\netstandard2.0\FBX.AssemblyInfo.cs
+C:\dev\git\b3d\b3d\newbuilder\FBX\bin\Debug\netstandard2.0\FBX.deps.json
+C:\dev\git\b3d\b3d\newbuilder\FBX\bin\Debug\netstandard2.0\FBX.dll
+C:\dev\git\b3d\b3d\newbuilder\FBX\bin\Debug\netstandard2.0\FBX.pdb
+C:\dev\git\b3d\b3d\newbuilder\FBX\obj\Debug\netstandard2.0\FBX.dll
+C:\dev\git\b3d\b3d\newbuilder\FBX\obj\Debug\netstandard2.0\FBX.pdb

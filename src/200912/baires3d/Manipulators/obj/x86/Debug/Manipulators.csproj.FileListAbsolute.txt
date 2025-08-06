@@ -1,0 +1,16 @@
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\bin\x86\Debug\Manipulators.dll
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\bin\x86\Debug\Manipulators.pdb
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\bin\x86\Debug\PickBuffer.dll
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\bin\x86\Debug\PickBuffer.pdb
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\obj\x86\Debug\Manipulators.dll
+E:\vm\snips\LinearPathLighting-Source-v1.0\Manipulators\obj\x86\Debug\Manipulators.pdb
+E:\vm\b3d\Baires3d\Manipulators\bin\x86\Debug\Manipulators.dll
+E:\vm\b3d\Baires3d\Manipulators\bin\x86\Debug\Manipulators.pdb
+E:\vm\b3d\Baires3d\Manipulators\bin\x86\Debug\PickBuffer.dll
+E:\vm\b3d\Baires3d\Manipulators\bin\x86\Debug\PickBuffer.pdb
+E:\vm\b3d\Baires3d\Manipulators\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\b3d\Baires3d\Manipulators\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\vm\b3d\Baires3d\Manipulators\obj\x86\Debug\Manipulators.dll
+E:\vm\b3d\Baires3d\Manipulators\obj\x86\Debug\Manipulators.pdb

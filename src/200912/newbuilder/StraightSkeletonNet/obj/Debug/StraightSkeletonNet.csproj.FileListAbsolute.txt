@@ -1,0 +1,5 @@
+C:\dev\gis\facade\csharp-libs-master\straight_skeleton\StraightSkeletonNet\bin\Debug\StraightSkeletonNet.dll
+C:\dev\gis\facade\csharp-libs-master\straight_skeleton\StraightSkeletonNet\bin\Debug\StraightSkeletonNet.pdb
+C:\dev\gis\facade\csharp-libs-master\straight_skeleton\StraightSkeletonNet\obj\Debug\StraightSkeletonNet.csprojAssemblyReference.cache
+C:\dev\gis\facade\csharp-libs-master\straight_skeleton\StraightSkeletonNet\obj\Debug\StraightSkeletonNet.dll
+C:\dev\gis\facade\csharp-libs-master\straight_skeleton\StraightSkeletonNet\obj\Debug\StraightSkeletonNet.pdb

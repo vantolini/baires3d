@@ -1,0 +1,4 @@
+C:\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+Z:\vm\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache

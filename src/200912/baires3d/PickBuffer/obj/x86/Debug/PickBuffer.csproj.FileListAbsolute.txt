@@ -1,0 +1,12 @@
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\bin\x86\Debug\PickBuffer.dll
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\bin\x86\Debug\PickBuffer.pdb
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\obj\x86\Debug\PickBuffer.dll
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\obj\x86\Debug\PickBuffer.pdb
+E:\vm\b3d\Baires3d\PickBuffer\bin\x86\Debug\PickBuffer.dll
+E:\vm\b3d\Baires3d\PickBuffer\bin\x86\Debug\PickBuffer.pdb
+E:\vm\b3d\Baires3d\PickBuffer\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\b3d\Baires3d\PickBuffer\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+E:\vm\b3d\Baires3d\PickBuffer\obj\x86\Debug\PickBuffer.dll
+E:\vm\b3d\Baires3d\PickBuffer\obj\x86\Debug\PickBuffer.pdb

@@ -1,0 +1,7 @@
+C:\b3d\b3d\b3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\newsrc\b3d\b3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\ar3d\ar3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\ar3d\new\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\b3d\new\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\SVN\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\b3d\Baires3d\baires3d\Content\obj\x86\Debug\ResolveAssemblyReference.cache

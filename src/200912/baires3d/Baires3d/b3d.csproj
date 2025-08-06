@@ -1,0 +1,308 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectGuid>{C2DE1B8E-B58B-422C-BED1-2A2F802088E0}</ProjectGuid>
+    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>b3d</RootNamespace>
+    <AssemblyName>baires3d</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <XnaFrameworkVersion>v3.1</XnaFrameworkVersion>
+    <XnaPlatform>Windows</XnaPlatform>
+    <XnaCrossPlatformGroupID>289e9bd9-e49b-4ce4-adfd-060b1f5b7455</XnaCrossPlatformGroupID>
+    <ApplicationIcon>Game.ico</ApplicationIcon>
+    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>false</XnaCompressContent>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>true</XnaCompressContent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GeoAPI, Version=1.1.0.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="mscorlib" />
+    <Reference Include="NetTopologySuite, Version=1.7.3.3125, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="NPack, Version=0.9.23543.0, Culture=neutral, PublicKeyToken=56f174b1685ddc6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\NPack.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=0.9.9.5, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\opentk-1.0-beta-2\opentk-1.0-beta-2\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Compatibility, Version=0.9.9.5, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\opentk-1.0-beta-2\opentk-1.0-beta-2\Binaries\OpenTK\Release\OpenTK.Compatibility.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=0.9.9.5, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\opentk-1.0-beta-2\opentk-1.0-beta-2\Binaries\OpenTK\Release\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections, Version=1.0.2141.24679, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\PowerCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="Proj4Utility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=908d00a27dccdeea, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\Proj4Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="SevenZipSharp, Version=1.0.3537.37869, Culture=neutral, PublicKeyToken=20de82c62b055c88, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SevenZipSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SlimDX, Version=2.0.8.42, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\SlimDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartThreadPool, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\SmartThreadPool.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Triangulator, Version=1.0.3642.769, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Triangulator\Triangulator\bin\Triangulator.dll</HintPath>
+    </Reference>
+    <Reference Include="zCamera, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\zCamera.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\CameraManager.cs" />
+    <Compile Include="Components\Ciudades\Barrio.cs" />
+    <Compile Include="Components\Ciudades\BarriosCollection.cs" />
+    <Compile Include="Components\Ciudades\CallesCollection.cs" />
+    <Compile Include="Components\Ciudades\CapitalFederal.cs" />
+    <Compile Include="Components\Ciudades\Ciudad.cs" />
+    <Compile Include="Components\Ciudades\CiudadesCollection.cs" />
+    <Compile Include="Components\Ciudades\IconoCollection.cs" />
+    <Compile Include="Components\Ciudades\Lote.cs" />
+    <Compile Include="Components\Ciudades\Manzana.cs" />
+    <Compile Include="Components\Ciudades\ManzanasCollection.cs" />
+    <Compile Include="Components\Ciudades\PuntosCollection.cs" />
+    <Compile Include="Components\CollisionHelper.cs" />
+    <Compile Include="Components\ComponentManager.cs" />
+    <Compile Include="Components\Core\CalleComponent.cs" />
+    <Compile Include="Components\Core\CallesComponent.cs" />
+    <Compile Include="Components\Core\CalleTramoComponent.cs" />
+    <Compile Include="Components\Core\Component.cs" />
+    <Compile Include="Components\Core\Components.cs" />
+    <Compile Include="Components\Core\IComponent.cs" />
+    <Compile Include="Components\Core\LabelComponent.cs" />
+    <Compile Include="Components\Core\LineComponent.cs" />
+    <Compile Include="Components\Core\MeshComponent.cs" />
+    <Compile Include="Components\Core\MeshComponentPart.cs" />
+    <Compile Include="Components\Core\PointComponent.cs" />
+    <Compile Include="Components\Core\PointsComponent.cs" />
+    <Compile Include="Components\Core\RenderableComponent.cs" />
+    <Compile Include="Components\Core\IRenderable.cs" />
+    <Compile Include="Components\SerializedComponents.cs" />
+    <Compile Include="Components\StreetManager.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DataBuilder\Builder\CiudadBuilder.cs" />
+    <Compile Include="DataBuilder\Builder\CompressionHelper.cs" />
+    <Compile Include="DataBuilder\Builder\ILayerBuilder.cs" />
+    <Compile Include="DataBuilder\Builder\LayerBuilder.cs" />
+    <Compile Include="DataBuilder\Builder\LayerCreator.cs" />
+    <Compile Include="DataBuilder\Builder\LayerHelper.cs" />
+    <Compile Include="DataBuilder\Builder\PointsBuilder.cs" />
+    <Compile Include="DataBuilder\Builder\ShapefileReader.cs" />
+    <Compile Include="DataBuilder\Builder\StreetsBuilder.cs" />
+    <Compile Include="DataBuilder\Feature.cs" />
+    <Compile Include="DataBuilder\Helpers\QuickExporter.cs" />
+    <Compile Include="DataBuilder\Helpers\QuickImporter.cs" />
+    <Compile Include="DataBuilder\LayerReader.cs" />
+    <Compile Include="DataBuilder\LineIntersection.cs" />
+    <Compile Include="DataBuilder\Builder\LayerWriter.cs" />
+    <Compile Include="DataBuilder\PathFinding.cs" />
+    <Compile Include="DataBuilder\Helpers\QuickSerializer.cs" />
+    <Compile Include="DataBuilder\Helper3d.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Internal Classes\CyclicalList.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Internal Classes\IndexableCyclicalLinkedList.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Internal Classes\LineSegment.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Internal Classes\Triangle.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Internal Classes\Vertex.cs" />
+    <Compile Include="DataBuilder\Triangulation\3\Triangulator.cs" />
+    <Compile Include="DataBuilder\Triangulation\Polygon.cs" />
+    <Compile Include="DataBuilder\Triangulation\TriangulationPolygonShape.cs" />
+    <Compile Include="DataBuilder\Triangulation\TriangulationSimple.cs" />
+    <Compile Include="DataBuilder\Triangulation\TriangulationWiki.cs" />
+    <Compile Include="Forms\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="Components\Settings.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Render\Blur\MotionBlurType.cs" />
+    <Compile Include="Render\BoundingSphereRenderer.cs" />
+    <Compile Include="Render\Blur\FullScreenQuad.cs" />
+    <Compile Include="Render\Blur\PostProcessor.cs" />
+    <Compile Include="Render\Render3D.cs" />
+    <Compile Include="Render\RoundLine\RoundLine.cs" />
+    <Compile Include="Render\RoundLine\RoundLineUtils.cs" />
+    <Compile Include="Render\Shaders\BasicShader.cs" />
+    <Compile Include="Render\Shadow\Entity.cs" />
+    <Compile Include="Render\Shadow\GaussianBlur.cs" />
+    <Compile Include="Render\Shadow\Light.cs" />
+    <Compile Include="Render\Shadow\Shadow.cs" />
+    <Compile Include="Render\SymbolRenderer.cs" />
+    <Compile Include="Components\Camera\Camera.cs" />
+    <Compile Include="Render\VertexDeclarations.cs" />
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="b3d.cs" />
+    <Compile Include="Render\Render2D.cs" />
+    <Compile Include="Render\TextureProvider.cs" />
+    <Compile Include="Render\Vertex\VertexBufferFactory.cs" />
+    <Compile Include="Render\Vertex\VertexDeclarationFactory.cs" />
+    <Compile Include="Render\Vertex\VertexElementAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Game.ico" />
+    <Content Include="GameThumbnail.png" />
+    <Content Include="Notes\notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <NestedContentProject Include="Content\Content.contentproj">
+      <Project>4535b3a7-53a4-4185-8550-7c2b5f70ba9e</Project>
+      <Visible>False</Visible>
+    </NestedContentProject>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.3.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataBuilder\Triangulation\GLU\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

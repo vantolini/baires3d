@@ -1,0 +1,2 @@
+E:\vm\snips\LinearPathLighting-Source-v1.0\PickBuffer\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\vm\b3d\Baires3d\PickBuffer\Content\obj\x86\Debug\ResolveAssemblyReference.cache

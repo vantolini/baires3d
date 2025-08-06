@@ -1,0 +1,6 @@
+﻿Capital.draw
+	Visibility + distance test all barrios
+	Draw closest lotes
+		Draw Manzanas
+			Draw Barrios
+	

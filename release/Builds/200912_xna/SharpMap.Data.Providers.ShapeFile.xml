@@ -1,0 +1,1223 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpMap.Data.Providers.ShapeFile</name>
+    </assembly>
+    <members>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileDataReader">
+            <summary>
+            Provides a fast-forward, read-only data stream to feature data
+            from a <see cref="N:SharpMap.Data.Providers.ShapeFile"/>.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileDataReader.IsDisposed">
+            <summary>
+            Gets a value indicating whether the ShapeFileDataReader has been disposed or not.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseField">
+            <summary>
+            Represents a field in a DBase file.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseField.ToString">
+            <summary>
+            Converts the field instance into a String representation.
+            </summary>
+            <returns>A String which describes the field.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseField.Equals(System.Object)">
+            <summary>
+            Compares two DbaseField instances to determine if they describe the
+            same field.
+            </summary>
+            <param name="obj">The field to compare to.</param>
+            <returns>True if the fields are equal, false otherwise.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseField.Equals(SharpMap.Data.Providers.ShapeFile.DbaseField)">
+            <summary>
+            Compares two DbaseField instances to determine if they describe the
+            same field.
+            </summary>
+            <param name="other">The field to compare to.</param>
+            <returns>True if the fields are equal, false otherwise.</returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.ColumnName">
+            <summary>
+            Gets the name of the field.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.DataType">
+            <summary>
+            Gets the CLR equivalent type of the field.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.Length">
+            <summary>
+            Gets the length in bytes of the field in a record.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.Decimals">
+            <summary>
+            Gets the number of decimals in a numeric field.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.Ordinal">
+            <summary>
+            Gets the position of the column relative to all columns
+            in the dBase schema.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseField.Offset">
+            <summary>
+            Gets the number of bytes from the start of the record
+            where the field data starts.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.parseIndex">
+            <summary>
+            Parses the .shx shapefile index file
+            </summary>
+            <remarks>
+            The index file is organized to give a matching offset and content length for each entry in the .shp file.
+            
+            From ESRI ShapeFile Technical Description document
+            
+            http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf
+            
+            Byte
+            Position    Field           Value           Type    Order
+            ---------------------------------------------------------
+            Byte 0      Offset          Offset          Integer Big
+            Byte 4      Content Length  Content Length  Integer Big
+            
+            The Integer type corresponds to the CLS Int32 type.
+            </remarks>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.IndexEntry">
+            <summary>
+            Entry for each feature to determine the position 
+            and length of the geometry in the .shp file.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.IndexEntry.Length">
+            <summary>
+            Number of 16-bit words taken up by the record.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.IndexEntry.Offset">
+            <summary>
+            Offset of the record in 16-bit words from the 
+            beginning of the shapefile.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.IndexEntry.ByteLength">
+            <summary>
+            Number of bytes in the shapefile record.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileIndex.IndexEntry.AbsoluteByteOffset">
+            <summary>
+            Record offest in bytes from the beginning of the shapefile.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeType">
+            <summary>
+            <see cref="N:SharpMap.Data.Providers.ShapeFile"/> geometry types.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Null">
+            <summary>
+            Null shape with no geometric data.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Point">
+            <summary>
+            A point.
+            </summary>
+            <remarks>
+            A point consists of a Double-precision coordinate in 2D space.
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IPoint"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLine">
+            <summary>
+            A connected line segment or segments.
+            </summary>
+            <remarks>
+            PolyLine is an ordered set of vertices that consists of one or more parts. 
+            A part is a connected sequence of two or more points. Parts may or may not 
+            be connected to one another. Parts may or may not intersect one another.
+            SharpMap interprets this as either 
+            <see cref="T:GeoAPI.Geometries.ILineString"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiLineString"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Polygon">
+            <summary>
+            A connected line segment with at least one closure.
+            </summary>
+            <remarks>
+            A polygon consists of one or more rings. A ring is a connected sequence of four or more
+            points that form a closed, non-self-intersecting loop. A polygon may contain multiple
+            outer rings. The order of vertices or orientation for a ring indicates which side of the ring
+            is the interior of the polygon. The neighborhood to the right of an observer walking along
+            the ring in vertex order is the neighborhood inside the polygon. Vertices of rings defining
+            holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
+            polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
+            as its parts.
+            SharpMap interprets this as either <see cref="T:GeoAPI.Geometries.IPolygon"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiPolygon"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.MultiPoint">
+            <summary>
+            A set of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Point">points</see>.
+            </summary>
+            <remarks>
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IMultiPoint"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointZ">
+            <summary>
+            A 3D <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Point">point</see>.
+            </summary>
+            <remarks>
+            A PointZ has 3 components to the coordinate vector, allowing it to be positioned 
+            anywhere in 3D space.
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IPoint3D"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLineZ">
+            <summary>
+            A 3D <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLine"/>, consisting of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointZ"/> points.
+            </summary>
+            <remarks>
+            A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
+            more points. Parts may or may not be connected to one another. Parts may or may not
+            intersect one another.
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.ILineString"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiLineString"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolygonZ">
+            <summary>
+            A 3D <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Polygon"/>, consisting of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointZ"/> points.
+            </summary>
+            <remarks>
+            A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
+            A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
+            its parts.
+            SharpMap interprets this as either <see cref="T:GeoAPI.Geometries.IPolygon"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiPolygon"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.MultiPointZ">
+            <summary>
+            A set of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointZ"/>s.
+            </summary>
+            <remarks>
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IMultiPoint"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointM">
+            <summary>
+            A <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Point"/> plus a measure value as a Double-precision floating point.
+            </summary>
+            <remarks>
+            A PointM consists of a Double-precision coordinate in the order 'X', 'Y', and a measure 'M'.
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IPoint"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLineM">
+            <summary>
+            A <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLine"/>, consisting of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointM"/> points.
+            </summary>
+            <remarks>
+            A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
+            two or more points. Parts may or may not be connected to one another. Parts may or may
+            not intersect one another.
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.ILineString"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiLineString"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolygonM">
+            <summary>
+            A <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PolyLine"/>, consisting of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointM"/> points.
+            </summary>
+            <remarks>
+            A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
+            SharpMap interprets this as either <see cref="T:GeoAPI.Geometries.IPolygon"/> 
+            or <see cref="T:GeoAPI.Geometries.IMultiPolygon"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.MultiPointM">
+            <summary>
+            A set of <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.PointM"/>s.
+            </summary>
+            <remarks>
+            SharpMap interprets this as <see cref="T:GeoAPI.Geometries.IMultiPoint"/>.
+            </remarks>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeType.MultiPatch">
+            <summary>
+            A set of surface patches.
+            </summary>
+            <remarks>
+            A MultiPatch consists of a number of surface patches. Each surface patch describes a
+            surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
+            part controls how the order of vertices of an MultiPatch part is interpreted.
+            SharpMap doesn't support this feature type.
+            </remarks>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider">
+            <summary>
+            A data provider for the ESRI ShapeFile spatial data format.
+            </summary>
+            <remarks>
+            <para>
+            The ShapeFile provider is used for accessing ESRI ShapeFiles. 
+            The ShapeFile should at least contain the [filename].shp 
+            and the [filename].shx index file. 
+            If feature-data is to be used a [filename].dbf file should 
+            also be present.
+            </para>
+            <para>
+            M and Z values in a shapefile are currently ignored by SharpMap.
+            </para>
+            </remarks>
+            <example>
+            Adding a data source to a layer:
+            <code lang="C#">
+            using SharpMap.Layers;
+            using SharpMap.Data.Providers.ShapeFile;
+            // [...]
+            FeatureLayer myLayer = new FeatureLayer("My layer");
+            myLayer.DataSource = new ShapeFileProvider(@"C:\data\MyShapeData.shp");
+            </code>
+            </example>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.#ctor(System.String,GeoAPI.Geometries.IGeometryFactory)">
+            <summary>
+            Initializes a shapefile data provider.
+            </summary>
+            <param name="filename">Path to shapefile (.shp file).</param>
+            <param name="geoFactory">The geometry factory to use to create geometries.</param>
+            <remarks>
+            This constructor creates a <see cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider"/>
+            with an in-memory spatial index.
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.#ctor(System.String,GeoAPI.Geometries.IGeometryFactory,GeoAPI.CoordinateSystems.ICoordinateSystemFactory)">
+            <summary>
+            Initializes a shapefile data provider.
+            </summary>
+            <param name="filename">Path to shapefile (.shp file).</param>
+            <param name="geoFactory">The geometry factory to use to create geometries.</param>
+            <param name="coordSysFactory">
+            The coordinate system factory to use to create spatial reference system objects.
+            </param>
+            <remarks>
+            This constructor creates a <see cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider"/>
+            with an in-memory spatial index.
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.#ctor(System.String,GeoAPI.Geometries.IGeometryFactory,GeoAPI.CoordinateSystems.ICoordinateSystemFactory,System.Boolean)">
+            <summary>
+            Initializes a ShapeFile data provider.
+            </summary>
+            <remarks>
+            <para>
+            If <paramref name="fileBasedIndex"/> is true, the spatial index 
+            will be read from a local copy. If it doesn't exist,
+            it will be generated and saved to [filename] + '.sidx'.
+            </para>
+            </remarks>
+            <param name="filename">Path to shapefile (.shp file).</param>
+            <param name="geoFactory">The geometry factory to use to create geometries.</param>
+            <param name="coordSysFactory">
+            The coordinate system factory to use to create spatial reference system objects.
+            </param>
+            <param name="fileBasedIndex">True to create a file-based spatial index.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ToString">
+            <summary>
+            Provides a String representation of the essential ShapeFile info.
+            </summary>
+            <returns>A String with the Name, HasDbf, FeatureCount and Extents values.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Create(System.String,System.String,SharpMap.Data.Providers.ShapeFile.ShapeType,GeoAPI.Geometries.IGeometryFactory)">
+            <summary>
+            Creates a new <see cref="N:SharpMap.Data.Providers.ShapeFile"/> instance and .shp and .shx file on disk.
+            </summary>
+            <param name="directory">Directory to create the shapefile in.</param>
+            <param name="layerName">Name of the shapefile.</param>
+            <param name="type">Type of shape to store in the shapefile.</param>
+            <returns>A ShapeFile instance.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Create(System.String,System.String,SharpMap.Data.Providers.ShapeFile.ShapeType,SharpMap.Data.FeatureDataTable,GeoAPI.Geometries.IGeometryFactory,GeoAPI.CoordinateSystems.ICoordinateSystemFactory)">
+            <summary>
+            Creates a new <see cref="N:SharpMap.Data.Providers.ShapeFile"/> instance and .shp, .shx and, optionally, .dbf file on disk.
+            </summary>
+            <remarks>If <paramref name="schema"/> is null, no .dbf file is created.</remarks>
+            <param name="directory">Directory to create the shapefile in.</param>
+            <param name="layerName">Name of the shapefile.</param>
+            <param name="type">Type of shape to store in the shapefile.</param>
+            <param name="schema">The schema for the attributes DBase file.</param>
+            <returns>A ShapeFile instance.</returns>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            
+            Thrown if <paramref name="type"/> is <see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Thrown if <paramref name="directory"/> is not a valid path.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="layerName"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Thrown if <paramref name="layerName"/> has invalid path characters.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Create(System.IO.DirectoryInfo,System.String,SharpMap.Data.Providers.ShapeFile.ShapeType,SharpMap.Data.FeatureDataTable,GeoAPI.Geometries.IGeometryFactory,GeoAPI.CoordinateSystems.ICoordinateSystemFactory)">
+            <summary>
+            Creates a new <see cref="N:SharpMap.Data.Providers.ShapeFile"/> instance and .shp, .shx and, optionally, 
+            .dbf file on disk.
+            </summary>
+            <remarks>If <paramref name="model"/> is null, no .dbf file is created.</remarks>
+            <param name="directory">Directory to create the shapefile in.</param>
+            <param name="layerName">Name of the shapefile.</param>
+            <param name="type">Type of shape to store in the shapefile.</param>
+            <param name="model">The schema for the attributes DBase file.</param>
+            <returns>A ShapeFile instance.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="layerName"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Thrown if <paramref name="layerName"/> has invalid path characters.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Create(System.IO.DirectoryInfo,System.String,SharpMap.Data.Providers.ShapeFile.ShapeType,SharpMap.Data.FeatureDataTable,System.Globalization.CultureInfo,System.Text.Encoding,GeoAPI.Geometries.IGeometryFactory,GeoAPI.CoordinateSystems.ICoordinateSystemFactory)">
+            <summary>
+            Creates a new <see cref="N:SharpMap.Data.Providers.ShapeFile"/> instance and .shp, .shx and, optionally, 
+            .dbf file on disk.
+            </summary>
+            <remarks>If <paramref name="model"/> is null, no .dbf file is created.</remarks>
+            <param name="directory">Directory to create the shapefile in.</param>
+            <param name="layerName">Name of the shapefile.</param>
+            <param name="type">Type of shape to store in the shapefile.</param>
+            <param name="model">The schema for the attributes DBase file.</param>
+            <param name="culture">
+            The culture info to use to determine default encoding and attribute formatting.
+            </param>
+            <param name="encoding">
+            The encoding to use if different from the <paramref name="culture"/>'s default encoding.
+            </param>
+            <returns>A ShapeFile instance.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="layerName"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Thrown if <paramref name="layerName"/> has invalid path characters.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Open(System.Boolean)">
+            <summary>
+            Opens the shapefile with optional exclusive access for
+            faster write performance during bulk updates.
+            </summary>
+            <param name="exclusive">
+            True if exclusive access is desired, false otherwise.
+            </param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.RebuildSpatialIndex">
+            <summary>
+            Forces a rebuild of the spatial index. 
+            If the instance of the ShapeFile provider
+            uses a file-based index the file is rewritten to disk,
+            otherwise it is kept only in memory.
+            </summary>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is executed and the shapefile is closed. 
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetExtents">
+            <summary>
+            Computes the extents of the data source.
+            </summary>
+            <returns>
+            An <see cref="T:GeoAPI.Geometries.IExtents"/> instance describing the extents of the entire data source.
+            </returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetFeatureCount">
+            <summary>
+            Returns the number of features in the entire data source.
+            </summary>
+            <returns>Count of the features in the entire data source.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetSchemaTable">
+            <summary>
+            Returns a <see cref="T:System.Data.DataTable"/> with rows describing the columns in the schema
+            for the configured provider. Provides the same result as 
+            <see cref="M:System.Data.IDataReader.GetSchemaTable"/>.
+            </summary>
+            <seealso cref="M:System.Data.IDataReader.GetSchemaTable"/>
+            <returns>A DataTable that describes the column metadata.</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.SetTableSchema(SharpMap.Data.FeatureDataTable)">
+            <summary>
+            Sets the schema of the given table to match the schema of the shapefile's attributes.
+            </summary>
+            <param name="target">Target table to set the schema of.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetFeatureByOid(System.UInt32)">
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> 
+            before calling.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetGeometryByOid(System.UInt32)">
+            <summary>
+            Returns the geometry corresponding to the Object ID
+            </summary>
+            <param name="oid">Object ID</param>
+            <returns><see cref="T:GeoAPI.Geometries.IGeometry"/></returns>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> 
+            before calling.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ExecuteOidQuery(SharpMap.Expressions.SpatialBinaryExpression)">
+            <summary>
+            Returns feature oids which match <paramref name="query"/>.
+            </summary>
+            <param name="query">Query expression for features.</param>
+            <returns>
+            An enumeration of oids (Object ids) which match the given <paramref name="query"/>.
+            </returns>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> 
+            before calling.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.SetTableSchema(SharpMap.Data.FeatureDataTable{System.UInt32})">
+            <summary>
+            Sets the schema of the given table to match the schema of the shapefile's attributes.
+            </summary>
+            <param name="target">Target table to set the schema of.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.SetTableSchema(SharpMap.Data.FeatureDataTable{System.UInt32},SharpMap.Data.SchemaMergeAction)">
+            <summary>
+            Sets the schema of the given table to match the schema of the shapefile's attributes.
+            </summary>
+            <param name="target">Target table to set the schema of.</param>
+            <param name="mergeAction">Action or actions to take when schemas don't match.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Insert(SharpMap.Data.FeatureDataRow{System.UInt32})">
+            <summary>
+            Adds a feature to the end of a shapefile.
+            </summary>
+            <param name="feature">Feature to append.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. 
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="feature"/> is null.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if <paramref name="feature.Geometry"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Insert(System.Collections.Generic.IEnumerable{SharpMap.Data.FeatureDataRow{System.UInt32}})">
+            <summary>
+            Adds features to the end of a shapefile.
+            </summary>
+            <param name="features">Enumeration of features to append.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. Check <see cref="!:IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="features"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Update(SharpMap.Data.FeatureDataRow{System.UInt32})">
+            <summary>
+            Updates a feature in a shapefile by deleting the previous 
+            version and inserting the updated version.
+            </summary>
+            <param name="feature">Feature to update.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. 
+            Check <see cref="!:IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="feature"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Update(System.Collections.Generic.IEnumerable{SharpMap.Data.FeatureDataRow{System.UInt32}})">
+            <summary>
+            Updates a set of features in a shapefile by deleting the previous 
+            versions and inserting the updated versions.
+            </summary>
+            <param name="features">Enumeration of features to update.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. 
+            Check <see cref="!:IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="features"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Delete(SharpMap.Data.FeatureDataRow{System.UInt32})">
+            <summary>
+            Deletes a row from the shapefile by marking it as deleted.
+            </summary>
+            <param name="feature">Feature to delete.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. 
+            Check <see cref="!:IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="feature"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Delete(System.Collections.Generic.IEnumerable{SharpMap.Data.FeatureDataRow{System.UInt32}})">
+            <summary>
+            Deletes a set of rows from the shapefile by marking them as deleted.
+            </summary>
+            <param name="features">Features to delete.</param>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed. 
+            Check <see cref="!:IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="features"/> is null.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.GetAllFeatues">
+            <summary>
+            Return all Features within the shapefile
+            </summary>
+            <returns> collection of features </returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Close">
+            <summary>
+            Closes the data source
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Open">
+            <summary>
+            Opens the data source
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.getFeature(System.UInt32,SharpMap.Data.FeatureDataTable{System.UInt32})">
+            <summary>
+            Gets a row from the DBase attribute file which has the 
+            specified <paramref name="oid">Object id</paramref> created from
+            <paramref name="table"/>.
+            </summary>
+            <param name="oid">Object id to lookup.</param>
+            <param name="table">DataTable with schema matching the feature to retrieve.</param>
+            <returns>Row corresponding to the Object id.</returns>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is called and the shapefile is closed.
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.createSpatialIndexFromFile(System.String)">
+            <summary>
+            Loads a spatial index from a file. If it doesn't exist, one is created and saved
+            </summary>
+            <param name="filename"></param>
+            <returns>QuadTree index</returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.createSpatialIndex">
+            <summary>
+            Generates a spatial index for a specified shape file.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.readGeometry(System.UInt32)">
+            <summary>
+            Reads and parses the geometry with ID 'oid' from the ShapeFile.
+            </summary>
+            <remarks>
+            Filtering is not applied to this method.
+            </remarks>
+            <param name="oid">Object ID</param>
+            <returns>
+            <see cref="T:GeoAPI.Geometries.IGeometry"/> instance from the 
+            ShapeFile corresponding to <paramref name="oid"/>.
+            </returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.parseProjection">
+            <summary>
+            Reads and parses the projection if a projection file exists
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.writePolygon(GeoAPI.Geometries.IPolygon,SharpMap.Data.Providers.ShapeFile.ShapeType)">
+            <summary>
+            write the polygon to the shapefilewriter
+            </summary>
+            <param name="polygon">polygon to be written</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.writeMultiPolygon(GeoAPI.Geometries.IMultiPolygon,SharpMap.Data.Providers.ShapeFile.ShapeType)">
+            <summary>
+            write the multipolygon to the shapefilewriter
+            </summary>
+            <param name="mpoly">multipolygon to be written</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.writePolygonCoordinates(GeoAPI.Geometries.IPolygon)">
+            <summary>
+            write the coordinates of a polygon to the shapefilewriter
+            </summary>
+            <param name="polygon">polygon who's coordinates are to be written out</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.writePolygonInformation(GeoAPI.Geometries.IExtents,System.Int32[],System.Int32)">
+            <summary>
+            Write the given information to the shapefilewriter
+            </summary>
+            <param name="extents">extents to be written</param>
+            <param name="parts">array of point indexes where the parts are to start</param>
+            <param name="pointCnt">total point count</param>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.DbfFilename">
+            <summary>
+            Gets the name of the DBase attribute file.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Encoding">
+            <summary>
+            Gets or sets the encoding used for parsing strings from the DBase DBF file.
+            </summary>
+            <remarks>
+            The DBase default encoding is <see cref="P:System.Text.Encoding.UTF8"/>.
+            </remarks>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if property is read or set and the shapefile is closed. 
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileIsInvalidException">
+            Thrown if set and there is no DBase file with this shapefile.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Filename">
+            <summary>
+            Gets the filename of the shapefile
+            </summary>
+            <remarks>If the filename changes, indexes will be rebuilt</remarks>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if method is executed and the shapefile is open or 
+            if set and the specified filename already exists.
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+            <exception cref="T:System.IO.FileNotFoundException">
+            </exception>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileIsInvalidException">
+            Thrown if set and the shapefile cannot be opened after a rename.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Filter">
+            <summary>
+            Gets or sets a delegate used for filtering records from the shapefile.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.HasDbf">
+            <summary>
+            Gets true if the shapefile has an attributes file, false otherwise.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.IdColumnName">
+            <summary>
+            The name given to the row identifier in a ShapeFileProvider.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.IndexFilename">
+            <summary>
+            Gets the record index (.shx file) filename for the given shapefile
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.IsSpatiallyIndexed">
+            <summary>
+            Gets a value indicating if the shapefile is spatially indexed.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ShapeType">
+            <summary>
+            Gets the <see cref="T:SharpMap.Data.Providers.ShapeFile.ShapeType">
+            shape geometry type</see> in this shapefile.
+            </summary>
+            <remarks>
+            <para>
+            The property isn't set until the first time the data source has been opened,
+            and will throw an exception if this property has been called since initialization. 
+            </para>
+            <para>
+            All the non-<see cref="F:SharpMap.Data.Providers.ShapeFile.ShapeType.Null"/> 
+            shapes in a shapefile are required to be of the same shape type.
+            </para>
+            </remarks>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            Thrown if property is read and the shapefile is closed. 
+            Check <see cref="P:SharpMap.Data.Providers.ProviderBase.IsOpen"/> before calling.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.EffectiveShapeType">
+            <summary>
+            returns the EffectiveShapeType taking into account any ForcedCoordinateOptions
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ForceCoordinateOptions">
+            <summary>
+            Allows the user to override the creation of coordinates.
+            This can be useful when reading data from bad 3D files.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ReadStrictness">
+            <summary>
+             Enables the shapefile provider to try handling invalid polygon data. 
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.ConnectionId">
+            <summary>
+            Gets the connection ID of the data source.
+            </summary>
+            <remarks>
+            The connection ID of a shapefile is its filename.
+            </remarks>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.ShapeFileProvider.Locale">
+            <summary>
+            Gets the locale of the data as a CultureInfo.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileIsInvalidException">
+            <summary>
+            Exception thrown when the shapefile is invalid or corrupt.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileException">
+            <summary>
+            Exception thrown during shapefile operations
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.InvalidDbaseFileOperationException">
+            <summary>
+            Exception thrown when the requested operation is 
+            invalid for the state of the reader.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbfSchemaMismatchException">
+            <summary>
+            Exception thrown when a <see cref="T:SharpMap.Data.FeatureDataTable"/> schema doesn't match the
+            DBase file schema.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileUnsupportedGeometryException">
+            <summary>
+            Exception thrown when a geometry type exists in a shapefile which is not currently supported.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants">
+            <summary>
+            Represents invariant shapefile values, offsets and lengths
+            derived from the shapefile specification.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.HeaderSizeBytes">
+            <summary>
+            Size, in bytes, of the shapefile header region.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.HeaderStartCode">
+            <summary>
+            The first value in any shapefile.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.VersionCode">
+            <summary>
+            The version of any valid shapefile.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.ShapeRecordHeaderByteLength">
+            <summary>
+            The number of bytes in a shapefile record header 
+            (per-record preamble).
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.ShapeRecordContentLengthByteLength">
+            <summary>
+            The number of bytes in a shapefile record header 
+            (per-record preamble) Content Length field.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.IndexRecordByteLength">
+            <summary>
+            The number of bytes in a record header (per-record preamble)
+            in a shapefile's index file.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.BoundingBoxFieldByteLength">
+            <summary>
+            The number of bytes used to store the bounding box, or 
+            extents, for the shapefile.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.NullDoubleValue">
+            <summary>
+            The value assigned to null in shape records
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.ShapeFileConstants.IdColumnName">
+            <summary>
+            The name given to the row identifier in a ShapeFileProvider.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseFile">
+            <summary>
+            Represents a dBase file used to store attribute data in a Shapefile.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Close">
+            <summary>
+            Closes the xBase file.
+            </summary>
+            <seealso cref="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.IsOpen"/>
+            <seealso cref="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Open"/>
+            <seealso cref="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Dispose"/>
+            <exception cref="T:System.ObjectDisposedException">
+            Thrown when the method is called and
+            Object has been disposed.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.GetAttributes(System.UInt32,SharpMap.Data.FeatureDataTable{System.UInt32})">
+            <summary>
+            Gets the feature at the specified Object ID
+            </summary>
+            <param name="oid">Row index. Zero-based.</param>
+            <param name="table">The feature table containing the schema used to 
+            read the row.</param>
+            <returns>The feature row for the given row index</returns>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.InvalidDbaseFileOperationException">
+            Thrown if this reader is closed (check <see cref="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.IsOpen"/> before calling), 
+            or if the column is an unsupported type.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown if <paramref name="oid"/> 
+            &lt; 0 or <paramref name="oid"/> &gt;= <see cref="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.RecordCount"/></exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="table"/> is 
+            null</exception>
+            <exception cref="T:System.ObjectDisposedException">Thrown when the method is called and 
+            Object has been disposed</exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Open">
+            <summary>
+            Opens the <see cref="T:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader"/> on the file 
+            specified in the constructor.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            Thrown when the method is called 
+            and Object has been disposed.
+            </exception>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Open(System.Boolean)">
+            <summary>
+            Opens the <see cref="T:SharpMap.Data.Providers.ShapeFile.DbaseFile"/> on the file name
+            specified in the constructor, 
+            with a value determining if the file is locked for 
+            exclusive read access or not.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            Thrown when the method is called 
+            and Object has been disposed.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.IsDisposed">
+            <summary>
+            Gets a value which indicates if this Object is disposed: 
+            <see langword="true"/> if it is, <see langword="false"/> otherwise
+            </summary>
+            <seealso cref="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Dispose"/>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.Encoding">
+            <summary>
+            Gets or sets the <see cref="T:System.Text.Encoding"/> used for parsing strings 
+            from the DBase DBF file.
+            </summary>
+            <remarks>
+            If the encoding type isn't set, the dbase driver will try to determine 
+            the correct <see cref="T:System.Text.Encoding"/>.
+            </remarks>
+            <exception cref="T:System.ObjectDisposedException">
+            Thrown when the property is 
+            fetched and/or set and Object has been disposed.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.IsOpen">
+            <summary>
+            Gets a value which indicates if the reader is open: 
+            true if it is, false otherwise.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.RecordCount">
+            <summary>
+            Number of records in the DBF file.
+            </summary>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.NewTable">
+            <summary>
+            Returns an empty <see cref="T:SharpMap.Data.FeatureDataTable"/> 
+            with the same schema as this DBase file.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader.#ctor(SharpMap.Data.Providers.ShapeFile.DbaseFile)">
+            <summary>
+            Creates a new instance of a <see cref="T:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader"/> for the
+            <paramref name="file"/>.
+            </summary>
+            <param name="file">The controlling DbaseFile instance.</param>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader.Dispose">
+            <summary>
+            Closes all files and disposes of all resources.
+            </summary>
+            <seealso cref="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.Close"/>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader.GetValue(System.UInt32,SharpMap.Data.Providers.ShapeFile.DbaseField)">
+            <summary>
+            Gets a value for the given <paramref name="row">row index</paramref> and 
+            <paramref name="column">column index</paramref>.
+            </summary>
+            <param name="row">
+            Index of the row to retrieve value from. Zero-based.
+            </param>
+            <param name="column">
+            Index of the column to retrieve value from. Zero-based.
+            </param>
+            <returns>
+            The value at the given (row, column).
+            </returns>
+            <exception cref="T:System.ObjectDisposedException">
+            Thrown when the method is called and 
+            Object has been disposed.
+            </exception>
+            <exception cref="T:SharpMap.Data.Providers.ShapeFile.InvalidDbaseFileOperationException">
+            Thrown if this reader is 
+            closed (check <see cref="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.IsOpen"/> before calling), or if the column is an 
+            unsupported type.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown if <paramref name="row"/> is 
+            less than 0 or greater than <see cref="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.RecordCount"/> - 1.
+            </exception>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader.IsDisposed">
+            <summary>
+            Gets a value which indicates if this Object is disposed: 
+            <see langword="true"/> if it is, <see langword="false"/> otherwise
+            </summary>
+            <seealso cref="M:SharpMap.Data.Providers.ShapeFile.DbaseFile.DbaseReader.Dispose"/>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry">
+            <summary>
+            A registry used to map CLR cultures and encodings to 
+            dBase language driver id (LDID) encoding specifiers.
+            </summary>
+            <remarks>
+            Lookup values are taken from ESRI's 
+            <a href="http://downloads.esri.com/support/documentation/pad_/ArcPad_RefGuide_1105.pdf">
+            ArcPad Reference Guide</a>
+            </remarks>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry.GetCulture(System.Byte)">
+            <summary>
+            Gets the <see cref="T:System.Globalization.CultureInfo"/> associated with the 
+            given dBase LDID.
+            </summary>
+            <param name="dBaseEncoding">
+            The language driver id (LDID) to get a CultureInfo for.
+            </param>
+            <returns>
+            A <see cref="T:System.Globalization.CultureInfo"/> which uses the encoding represented by 
+            <paramref name="dBaseEncoding"/> by default.
+            </returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry.GetEncoding(System.Byte)">
+            <summary>
+            Gets the <see cref="T:System.Text.Encoding"/> which matches the 
+            given dBase LDID.
+            </summary>
+            <param name="dBaseEncoding">
+            The language driver id (LDID) to get the <see cref="T:System.Text.Encoding"/> for.
+            </param>
+            <returns>
+            An <see cref="T:System.Text.Encoding"/> which corresponds to the the
+            <paramref name="dBaseEncoding"/> code established by ESRI.
+            </returns>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry.GetLanguageDriverCode(System.Globalization.CultureInfo,System.Text.Encoding)">
+            <summary>
+            Gets the language driver id (LDID) for a given pair of <see cref="T:System.Globalization.CultureInfo"/>
+            and <see cref="T:System.Text.Encoding"/>.
+            </summary>
+            <param name="info">The CultureInfo used to lookup the LDID.</param>
+            <param name="encoding">The Encoding used to lookup the LDID.</param>
+            <returns>
+            A language driver code used to specify the encoding used to write text in the dBase file.
+            </returns>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry.CodePageChoice">
+            <summary>
+            Specifies which code page to use in a <see cref="T:System.Globalization.TextInfo"/>
+            instance.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseLocaleRegistry.CultureWithEncoding">
+            <summary>
+            Represents a culture and encoding pair.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.ShapeFileHeader.parseHeader(System.IO.BinaryReader)">
+            <summary>
+            Reads and parses the header of the .shp index file
+            </summary>
+            <remarks>
+            From ESRI ShapeFile Technical Description document
+            
+            http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf
+            
+            Byte
+            Position    Field           Value       Type    Order
+            -----------------------------------------------------
+            Byte 0      File Code       9994        Integer Big
+            Byte 4      Unused          0           Integer Big
+            Byte 8      Unused          0           Integer Big
+            Byte 12     Unused          0           Integer Big
+            Byte 16     Unused          0           Integer Big
+            Byte 20     Unused          0           Integer Big
+            Byte 24     File Length     File Length Integer Big
+            Byte 28     Version         1000        Integer Little
+            Byte 32     Shape Type      Shape Type  Integer Little
+            Byte 36     Bounding Box    Xmin        Double  Little
+            Byte 44     Bounding Box    Ymin        Double  Little
+            Byte 52     Bounding Box    Xmax        Double  Little
+            Byte 60     Bounding Box    Ymax        Double  Little
+            Byte 68*    Bounding Box    Zmin        Double  Little
+            Byte 76*    Bounding Box    Zmax        Double  Little
+            Byte 84*    Bounding Box    Mmin        Double  Little
+            Byte 92*    Bounding Box    Mmax        Double  Little
+            
+            * Unused, with value 0.0, if not Measured or Z type
+            
+            The "Integer" type corresponds to the CLS Int32 type, and "Double" to CLS Double (IEEE 754).
+            </remarks>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.InvalidDbaseFileException">
+            <summary>
+            Exception thrown when the the Dbase file is corrupt.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseConstants">
+            <summary>
+            Constants used to parse dBase files.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.DbfVersionCode">
+            <summary>
+            Version of the dBase file specification Shapefiles use: 3.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.EncodingOffset">
+            <summary>
+            Offset of the language driver code in the dBase header.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.ColumnDescriptionOffset">
+            <summary>
+            Offset of the start of the column description section.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.ColumnDescriptionLength">
+            <summary>
+            Length of a column description entry.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.BytesFromEndOfDecimalInFieldRecord">
+            <summary>
+            Number of bytes to the end of a column entry from the end of the decimal Byte.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.NumericNullIndicator">
+            <summary>
+            Character used to specify a null value for numbers.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.DeletedIndicator">
+            <summary>
+            Character used to specify a deleted row.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.NotDeletedIndicator">
+            <summary>
+            Character used to specify a non-deleted row.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.BooleanNullChar">
+            <summary>
+            Character used to specify a null value for boolean values.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.NullDateValue">
+            <summary>
+            Character used to specify a null value for date-time values.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.HeaderTerminator">
+            <summary>
+            Character used to indicate the end of the dBase header in the file.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.FileTerminator">
+            <summary>
+            Character used to indicate the end of the dBase file.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.DbaseEpoch">
+            <summary>
+            The last updated value in the header is measured from this year.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.FieldNameLength">
+            <summary>
+            Size of the column name field in a column description entry.
+            </summary>
+        </member>
+        <member name="F:SharpMap.Data.Providers.ShapeFile.DbaseConstants.StorageNumberFormat">
+            <summary>
+            The format used to store numbers in a dBase file.
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.ShapeFileInvalidOperationException">
+            <summary>
+            Exception thrown when an operation is attempted which is not defined for the state of the <see cref="N:SharpMap.Data.Providers.ShapeFile"/>
+            </summary>
+        </member>
+        <member name="T:SharpMap.Data.Providers.ShapeFile.DbaseHeader">
+            <summary>
+            Represents the header of an xBase file.
+            </summary>
+        </member>
+        <member name="M:SharpMap.Data.Providers.ShapeFile.DbaseHeader.GetSchemaTable">
+            <summary>
+            Returns a DataTable that describes the column metadata of the DBase file.
+            </summary>
+            <returns>A DataTable that describes the column metadata.</returns>
+        </member>
+        <member name="P:SharpMap.Data.Providers.ShapeFile.DbaseHeader.LanguageDriver">
+            <summary>
+            Gets a value which indicates which code page text data is 
+            stored in.
+            </summary>
+        </member>
+    </members>
+</doc>

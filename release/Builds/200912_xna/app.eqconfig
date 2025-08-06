@@ -1,0 +1,24 @@
+﻿<config>
+  <OutputFolder>$(AppDir)-Profiled</OutputFolder>
+  <ReportFolderNetFull>$(SystemRoot)\Temp\EQATECProfilerLogs</ReportFolderNetFull>
+  <ReportFolderNetCF>\Temp\EQATECProfilerLogs</ReportFolderNetCF>
+  <AutoSnapshot>Main OnStop ApplicationEnd</AutoSnapshot>
+  <TinyMethodAction>Skip</TinyMethodAction>
+  <RuntimeControlEnabled>true</RuntimeControlEnabled>
+  <RuntimeControlPort>3947</RuntimeControlPort>
+  <RuntimeModuleLogLevel>Errors</RuntimeModuleLogLevel>
+  <ExcludeFiles>
+    <ExcludeFile>7z.dll</ExcludeFile>
+    <ExcludeFile>BEPUphysics.dll</ExcludeFile>
+    <ExcludeFile>ICSharpCode.SharpZipLib.dll</ExcludeFile>
+    <ExcludeFile>JigLibX.dll</ExcludeFile>
+    <ExcludeFile>InstancedModelPipeline.dll</ExcludeFile>
+    <ExcludeFile>NPack.dll</ExcludeFile>
+    <ExcludeFile>PJLControls.dll</ExcludeFile>
+    <ExcludeFile>SevenZipSharp.dll</ExcludeFile>
+    <ExcludeFile>SharpMap.dll</ExcludeFile>
+    <ExcludeFile>SlimDX.dll</ExcludeFile>
+    <ExcludeFile>Ziggyware.Utility.dll</ExcludeFile>
+  </ExcludeFiles>
+  <SignActions />
+</config>

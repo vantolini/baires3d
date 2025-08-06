@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Triangulator</name>
+    </assembly>
+    <members>
+        <member name="T:Triangulator.Delauney">
+            <summary>
+            Performs the Delauney triangulation on a set of vertices.
+            </summary>
+            <remarks>
+            Based on Paul Bourke's "An Algorithm for Interpolating Irregularly-Spaced Data
+            with Applications in Terrain Modelling"
+            http://astronomy.swin.edu.au/~pbourke/modelling/triangulate/
+            </remarks>
+        </member>
+        <member name="M:Triangulator.Delauney.Triangulate(System.Collections.Generic.List{Triangulator.Geometry.Point})">
+            <summary>
+            Performs Delauney triangulation on a set of points.
+            </summary>
+            <remarks>
+            <para>
+            The triangulation doesn't support multiple points with the same planar location.
+            Vertex-lists with duplicate points may result in strange triangulation with intersecting edges.
+            To avoid adding multiple points to your vertex-list you can use the following anonymous predicate
+            method:
+            <code>
+            if(!Vertices.Exists(delegate(Triangulator.Geometry.Point p) { return pNew.Equals2D(p); }))
+            	Vertices.Add(pNew);
+            </code>
+            </para>
+            <para>The triangulation algorithm may be described in pseudo-code as follows:
+            <code>
+            subroutine Triangulate
+            input : vertex list
+            output : triangle list
+               initialize the triangle list
+               determine the supertriangle
+               add supertriangle vertices to the end of the vertex list
+               add the supertriangle to the triangle list
+               for each sample point in the vertex list
+                  initialize the edge buffer
+                  for each triangle currently in the triangle list
+                     calculate the triangle circumcircle center and radius
+                     if the point lies in the triangle circumcircle then
+                        add the three triangle edges to the edge buffer
+                        remove the triangle from the triangle list
+                     endif
+                  endfor
+                  delete all doubly specified edges from the edge buffer
+                     this leaves the edges of the enclosing polygon only
+                  add to the triangle list all triangles formed between the point 
+                     and the edges of the enclosing polygon
+               endfor
+               remove any triangles from the triangle list that use the supertriangle vertices
+               remove the supertriangle vertices from the vertex list
+            end
+            </code>
+            </para>
+            </remarks>
+            <param name="Vertex">List of vertices to triangulate.</param>
+            <returns>Triangles referencing vertex indices arranged in clockwise order</returns>
+        </member>
+        <member name="M:Triangulator.Delauney.InCircle(Triangulator.Geometry.Point,Triangulator.Geometry.Point,Triangulator.Geometry.Point,Triangulator.Geometry.Point)">
+            <summary>
+            Returns true if the point (p) lies inside the circumcircle made up by points (p1,p2,p3)
+            </summary>
+            <remarks>
+            NOTE: A point on the edge is inside the circumcircle
+            </remarks>
+            <param name="p">Point to check</param>
+            <param name="p1">First point on circle</param>
+            <param name="p2">Second point on circle</param>
+            <param name="p3">Third point on circle</param>
+            <returns>true if p is inside circle</returns>
+        </member>
+        <member name="T:Triangulator.Geometry.Edge">
+            <summary>
+            Edge made from two point indexes
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Edge.p1">
+            <summary>
+            Start of edge index
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Edge.p2">
+            <summary>
+            End of edge index
+            </summary>
+        </member>
+        <member name="M:Triangulator.Geometry.Edge.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new edge instance
+            </summary>
+            <param name="point1">Start edge vertex index</param>
+            <param name="point2">End edge vertex index</param>
+        </member>
+        <member name="M:Triangulator.Geometry.Edge.#ctor">
+            <summary>
+            Initializes a new edge instance with start/end indexes of '0'
+            </summary>
+        </member>
+        <member name="M:Triangulator.Geometry.Edge.Equals(Triangulator.Geometry.Edge)">
+            <summary>
+            Checks whether two edges are equal disregarding the direction of the edges
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Triangulator.Geometry.Point">
+            <summary>
+            2D Point with double precision
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Point._X">
+            <summary>
+            X component of point
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Point._Y">
+            <summary>
+            Y component of point
+            </summary>
+        </member>
+        <member name="M:Triangulator.Geometry.Point.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of a point
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:Triangulator.Geometry.Point.Equals2D(Triangulator.Geometry.Point)">
+            <summary>
+            Makes a planar checks for if the points is spatially equal to another point.
+            </summary>
+            <param name="other">Point to check against</param>
+            <returns>True if X and Y values are the same</returns>
+        </member>
+        <member name="P:Triangulator.Geometry.Point.X">
+            <summary>
+            Gets or sets the X component of the point
+            </summary>
+        </member>
+        <member name="P:Triangulator.Geometry.Point.Y">
+            <summary>
+            Gets or sets the Y component of the point
+            </summary>
+        </member>
+        <member name="T:Triangulator.Geometry.Triangle">
+            <summary>
+            Triangle made from three point indexes
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Triangle.p1">
+            <summary>
+            First vertex index in triangle
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Triangle.p2">
+            <summary>
+            Second vertex index in triangle
+            </summary>
+        </member>
+        <member name="F:Triangulator.Geometry.Triangle.p3">
+            <summary>
+            Third vertex index in triangle
+            </summary>
+        </member>
+        <member name="M:Triangulator.Geometry.Triangle.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of a triangle
+            </summary>
+            <param name="point1">Vertex 1</param>
+            <param name="point2">Vertex 2</param>
+            <param name="point3">Vertex 3</param>
+        </member>
+        <member name="T:Triangulator.Geometry.Point`1">
+            <summary>
+            A point with an attribute value of type 'T'
+            </summary>
+        </member>
+        <member name="M:Triangulator.Geometry.Point`1.#ctor(System.Double,System.Double,`0)">
+            <summary>
+            Initializes a new instance of the point
+            </summary>
+            <param name="x">X component</param>
+            <param name="y">Y component</param>
+            <param name="attribute">Attribute</param>
+        </member>
+        <member name="M:Triangulator.Geometry.Point`1.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the point and sets the attribute to its default value
+            </summary>
+            <param name="x">X component</param>
+            <param name="y">Y component</param>
+        </member>
+        <member name="P:Triangulator.Geometry.Point`1.Attribute">
+            <summary>
+            Gets or sets the attribute component of the point
+            </summary>
+        </member>
+    </members>
+</doc>

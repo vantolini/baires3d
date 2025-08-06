@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ManagedBufferedCoordinate</name>
+    </assembly>
+    <members>
+        <member name="T:NetTopologySuite.Coordinates.BufferedCoordinateSequence">
+            <summary>
+            An <see cref="T:GeoAPI.Coordinates.ICoordinateSequence`1"/>.
+            </summary>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.BufferedCoordinateSequence.Reverse">
+            <summary>
+            Reverses the coordinates in a sequence in-place.
+            </summary>
+        </member>
+        <member name="T:NetTopologySuite.Coordinates.PrecisionModel">
+            <summary> 
+            Specifies the precision model of the <see cref="T:GeoAPI.Coordinates.ICoordinate"/>s 
+            in a <see cref="T:GeoAPI.Geometries.IGeometry`1"/>.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="M:NetTopologySuite.Coordinates.PrecisionModel.MakePrecise(System.Double)"/> method allows for rounding a coordinate to a "precise" value; 
+            that is, one whose precision is known exactly. Coordinates are assumed to be precise in 
+            geometries; the coordinates are assumed to be rounded to the precision model given for the 
+            geometry. NTS factory routines automatically round
+            coordinates to the precision model before creating geometries. All internal operations 
+            assume that coordinates are  rounded to the precision model. Generative methods 
+            (such as boolean operations) always round computed coordinates to the appropriate 
+            precision model. 
+            </para>
+            <para>
+            Currently three types of precision model are supported:
+            <list type="bullet">
+            <item>
+            <term><see cref="F:GeoAPI.Coordinates.PrecisionModelType.DoubleFloating"/></term>
+            <description>
+            Represents full double precision floating point. This is the default 
+            precision model used in NTS.
+            </description>
+            </item>
+            <item>
+            <term><see cref="F:GeoAPI.Coordinates.PrecisionModelType.SingleFloating"/></term>
+            <description>
+            Represents single precision floating point. 
+            </description>
+            </item>
+            <item>
+            <term><see cref="F:GeoAPI.Coordinates.PrecisionModelType.Fixed"/></term>
+            <description>
+            Represents a model with a fixed number of decimal places. A fixed
+            <see cref="T:GeoAPI.Coordinates.IPrecisionModel`1"/> is specified by a scale factor. 
+            The scale factor specifies the grid which numbers are rounded to. Input coordinates 
+            are mapped to fixed coordinates according to the following equations 
+            (known as arithmetic asymmetric rounding, since it moves away from zero if positive,
+            and towards zero if negative): 
+            <code>
+            Double x = Math.Floor((inputPt.X * scale) + 0.5) / scale 
+            Double y = Math.Floor((inputPt.Y * scale) + 0.5) / scale 
+            </code>
+            </description>
+            </item>
+            </list>
+            Coordinates are represented internally as a <see cref="T:System.Double"/> value. 
+            Since the CLI uses the IEEE-754 floating point standard, this provides 53 bits of precision. 
+            (Thus the maximum precisely representable integer is 9,007,199,254,740,992). 
+            NTS methods currently do not handle inputs with different precision models. 
+            </para>
+            </remarks>
+        </member>
+        <member name="F:NetTopologySuite.Coordinates.PrecisionModel.MaximumPreciseValue">
+            <summary>  
+            The maximum precise value representable in a Double. Since IEEE-754
+            Double-precision numbers allow 53 bits of significand, the value is equal to
+            2^53 - 1.  This provides <i>almost</i> 16 decimal digits of precision.
+            </summary>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.#ctor(GeoAPI.Coordinates.ICoordinateFactory{NetTopologySuite.Coordinates.BufferedCoordinate})">
+            <summary> 
+            Creates a <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> with a default precision
+            of <see cref="F:GeoAPI.Coordinates.PrecisionModelType.DoubleFloating"/>.
+            </summary>
+            <param name="coordinateFactory">
+            The coordinate factory to use to creat coordinates.
+            </param>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.#ctor(GeoAPI.Coordinates.ICoordinateFactory{NetTopologySuite.Coordinates.BufferedCoordinate},GeoAPI.Coordinates.PrecisionModelType)">
+            <summary>
+            Creates a <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> that specifies
+            an explicit precision model type.
+            If the model type is Fixed the scale factor will default to 1.
+            </summary>
+            <param name="coordinateFactory">
+            The coordinate factory to use to creat coordinates.
+            </param>
+            <param name="modelType">
+            The type of the precision model.
+            </param>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.#ctor(GeoAPI.Coordinates.ICoordinateFactory{NetTopologySuite.Coordinates.BufferedCoordinate},System.Double)">
+            <summary>  
+            Creates a <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> that specifies Fixed precision.
+            </summary>
+            <param name="coordinateFactory">
+            The coordinate factory to use to creat coordinates.
+            </param>
+            <param name="scale">
+            Amount by which to multiply a coordinate after subtracting
+            the offset, to obtain a precise coordinate.
+            </param>  
+            <remarks>
+            Fixed-precision coordinates are represented as precise internal coordinates,
+            which are rounded to the grid defined by the scale factor.
+            </remarks>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.#ctor(GeoAPI.Coordinates.ICoordinateFactory{NetTopologySuite.Coordinates.BufferedCoordinate},GeoAPI.Coordinates.IPrecisionModel)">
+            <summary> 
+            Copy constructor to create a new <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/>
+            from an existing one.
+            </summary>
+            <param name="coordinateFactory">
+            The coordinate factory to use to creat coordinates.
+            </param>
+            <param name="pm">The <see cref="T:GeoAPI.Coordinates.IPrecisionModel"/> to copy.</param>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.#ctor(NetTopologySuite.Coordinates.PrecisionModel)">
+            <summary> 
+            Copy constructor to create a new <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/>
+            from an existing one.
+            </summary>
+            <param name="pm">The precision model to copy.</param>
+        </member>
+        <member name="M:NetTopologySuite.Coordinates.PrecisionModel.CompareTo(GeoAPI.Coordinates.IPrecisionModel{NetTopologySuite.Coordinates.BufferedCoordinate})">
+            <summary> 
+            Compares this <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> object with the 
+            specified object for order.
+            </summary>
+            <param name="other">
+            The <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> with which this 
+            <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> is being compared.
+            </param>
+            <remarks>
+            A <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> is greater than another if it 
+            provides greater precision. The comparison is based on the value returned by
+            <see cref="P:NetTopologySuite.Coordinates.PrecisionModel.MaximumSignificantDigits"/>.
+            This comparison is not strictly accurate when comparing floating precision models
+            to fixed models; however, it is correct when both models are either floating or fixed.
+            </remarks>
+            <returns>
+            A negative integer, zero, or a positive integer as this 
+            <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/> is less than, equal to, 
+            or greater than the specified <see cref="T:NetTopologySuite.Coordinates.PrecisionModel"/>.
+            </returns>
+        </member>
+    </members>
+</doc>

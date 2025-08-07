@@ -16,6 +16,7 @@ Back in 2009, I wrote the following to describe it:
 > * Integration with Facebook and other social networks.
 > * Visualization of scientific and educational information (planning, terrain analysis, hydrology, agronomic engineering, and other fields).
 
+
 Of course, none of this saw the light of day, even though many of these features were mostly complete.
 
 I should have released this years ago, and see where life would take me. I opted to shelve this, and dedicated myself entirely to regular employment.
@@ -28,4 +29,11 @@ I poured a lot of time and energy into it, in detriment of many other things, bu
 At one point, I was even meeting local mappers in Buenos Aires cafés to exchange ESRI shapefiles (and many other formats) burned onto DVDs. That’s how deep I was in.
 
 This release includes source code from December 2009 (though it's a mess) and some builds from different dates, including those made in 2013 with Unity3d. Source code for the Unity3d project will soon follow.
- 
+
+
+# Videos
+[![Paseando sobre Buenos Aires](image.png)](https://youtu.be/-Yssn_y7-xI)
+
+[![Prueba con manejo de auto en Buenos Aires](image-1.png)](https://youtu.be/Ui9cnCPexJ0)
+
+[![Prueba con edificios random de Buenos Aires](image-2.png)](https://youtu.be/RJpMHjaqt84)
